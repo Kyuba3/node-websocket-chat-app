@@ -1,3 +1,6 @@
+const socket = io();
+socket.on('message', ({author, content}) => addMessage(author, content));
+
 const loginForm = document.querySelector("#welcome-form");
 const messagesSection = document.querySelector("#messages-section");
 const messageList = document.querySelector("#messages-list");
@@ -25,6 +28,7 @@ const sendMessage = (e) => {
     alert('message is empty');
   } else {
     addMessage(userName, messageContentInput.value);
+    socket.emit('message', { author: userName, content: messageContentInput.value });
     messageContentInput.value = '';
   }
 }
