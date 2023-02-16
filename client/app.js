@@ -1,6 +1,7 @@
 const socket = io();
 socket.on('message', ({author, content}) => addMessage(author, content));
 
+
 const loginForm = document.querySelector("#welcome-form");
 const messagesSection = document.querySelector("#messages-section");
 const messageList = document.querySelector("#messages-list");
@@ -17,6 +18,7 @@ const login = (e) => {
     loginForm.classList.remove("show");
     messagesSection.classList.add("show");
     addMessageForm.classList.add("show");
+    socket.emit('join', userName);
   } else {
     alert("Enter a username");
   }
